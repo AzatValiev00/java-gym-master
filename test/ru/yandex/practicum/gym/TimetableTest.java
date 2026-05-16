@@ -190,29 +190,29 @@ public class TimetableTest {
         Assertions.assertEquals(1, minCoach.count);
     }
 
-@Test
+    @Test
     void testGetCountByCoachesWhenNoCoaches() {
-    Assertions.assertNull(timetable.getCountByCoaches());
-}
+        Assertions.assertNull(timetable.getCountByCoaches());
+    }
 
-@Test
+    @Test
     void testGetCountByCoachesWhenSingleCoach() {
-    Group groupAdult = new Group("Акробатика для взрослых", Age.ADULT, 90);
-    TrainingSession mondayAdultTrainingSession = new TrainingSession(groupAdult, coach,
-            DayOfWeek.MONDAY, new TimeOfDay(10, 0));
-    TrainingSession mondayChildTrainingSession = new TrainingSession(groupChild, coach,
-            DayOfWeek.MONDAY, new TimeOfDay(15, 0));
-    TrainingSession anotherMondayChildTrainingSession = new TrainingSession(groupChild, coach,
-            DayOfWeek.MONDAY, new TimeOfDay(15, 0));
+        Group groupAdult = new Group("Акробатика для взрослых", Age.ADULT, 90);
+        TrainingSession mondayAdultTrainingSession = new TrainingSession(groupAdult, coach,
+                DayOfWeek.MONDAY, new TimeOfDay(10, 0));
+        TrainingSession mondayChildTrainingSession = new TrainingSession(groupChild, coach,
+                DayOfWeek.MONDAY, new TimeOfDay(15, 0));
+        TrainingSession anotherMondayChildTrainingSession = new TrainingSession(groupChild, coach,
+                DayOfWeek.MONDAY, new TimeOfDay(15, 0));
 
-    timetable.addNewTrainingSession(mondayAdultTrainingSession);
-    timetable.addNewTrainingSession(mondayChildTrainingSession);
-    timetable.addNewTrainingSession(anotherMondayChildTrainingSession);
+        timetable.addNewTrainingSession(mondayAdultTrainingSession);
+        timetable.addNewTrainingSession(mondayChildTrainingSession);
+        timetable.addNewTrainingSession(anotherMondayChildTrainingSession);
 
-    List<CounterOfTrainings> coachCount = timetable.getCountByCoaches();
-    CounterOfTrainings maxCoach = coachCount.getFirst();
+        List<CounterOfTrainings> coachCount = timetable.getCountByCoaches();
+        CounterOfTrainings maxCoach = coachCount.getFirst();
 
-    Assertions.assertEquals(1, coachCount.size());
-    Assertions.assertEquals(3, maxCoach.count);
-}
+        Assertions.assertEquals(1, coachCount.size());
+        Assertions.assertEquals(3, maxCoach.count);
+    }
 }
