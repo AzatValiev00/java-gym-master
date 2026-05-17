@@ -34,7 +34,7 @@ public class TimetableTest {
         Assertions.assertEquals(1, currentTimeSessions.size());
 
         //Проверить, что за вторник не вернулось занятий
-        Assertions.assertNull(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY));
+        Assertions.assertTrue(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY).isEmpty());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TimetableTest {
         Assertions.assertEquals(new TimeOfDay(20, 0), thursdaySessionsTimes.getLast());
 
         // Проверить, что за вторник не вернулось занятий
-        Assertions.assertNull(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY));
+        Assertions.assertTrue(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY).isEmpty());
     }
 
     @Test
@@ -147,8 +147,8 @@ public class TimetableTest {
                 DayOfWeek.MONDAY, new TimeOfDay(10, -1));
         timetable.addNewTrainingSession(monday4ChildTrainingSession);
 
-        Assertions.assertNull(timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY));
-        Assertions.assertNull(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY));
+        Assertions.assertTrue(timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY).isEmpty());
+        Assertions.assertTrue(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY).isEmpty());
     }
 
     @Test
@@ -185,14 +185,14 @@ public class TimetableTest {
         CounterOfTrainings minCoach = coachCount.get(2);
 
         Assertions.assertEquals(3, coachCount.size());
-        Assertions.assertEquals(3, maxCoach.count);
-        Assertions.assertEquals(2, midCoach.count);
-        Assertions.assertEquals(1, minCoach.count);
+        Assertions.assertEquals(3, maxCoach.getCount());
+        Assertions.assertEquals(2, midCoach.getCount());
+        Assertions.assertEquals(1, minCoach.getCount());
     }
 
     @Test
     void testGetCountByCoachesWhenNoCoaches() {
-        Assertions.assertNull(timetable.getCountByCoaches());
+        Assertions.assertTrue(timetable.getCountByCoaches().isEmpty());
     }
 
     @Test
@@ -213,6 +213,6 @@ public class TimetableTest {
         CounterOfTrainings maxCoach = coachCount.getFirst();
 
         Assertions.assertEquals(1, coachCount.size());
-        Assertions.assertEquals(3, maxCoach.count);
+        Assertions.assertEquals(3, maxCoach.getCount());
     }
 }
